@@ -12,7 +12,9 @@ class Planet:
         self.eccentricity = epsilon
         self.period = period
         self.semimajor_axis = semimajor_axis
-        self.semiminor_axis = semimajor_axis*sqrt(1-(pow(epsilon,2)))
+        self.semiminor_axis = semimajor_axis*sqrt(1-(pow(epsilon, 2)))
+        self.mu = pow((2 * pi / period), 2) * pow(semimajor_axis, 3)
+        self.h = -self.mu / (2 * semimajor_axis)
         
     def xi(self, t):
         return 2 * pi * t / self.period
@@ -40,10 +42,10 @@ class Planet:
         return Algorithm.newton_raphson(f, diff_f)
 
     def get_pos_newton_raphson(self, t):
-        return self.position(self.get_pos_newton_raphson(t))
+        return self.position(self.get_u_newton_raphson(t))
 
     def area(self, t1, t2, c):
-        return abs(c)*(t2-t1)/2
+        return abs(c) * (t2-t1) / 2
 
     def distance_sun_newton_raphson(self, t):
         u = self.get_u_newton_raphson(t)
@@ -55,11 +57,11 @@ class Planet:
 
     def diff_eccentric_newton_raphson(self, t):
         u = self.get_u_newton_raphson(t)
-        return 2 * pi/ (self.period * (1 - self.eccentricity * cos(u)))
+        return 2 * pi / (self.period * (1 - self.eccentricity * cos(u)))
 
     def diff_eccentric_bessel(self, t):
         u = self.get_u_bessel(t)
-        return 2 * pi/ (self.period * (1 - self.eccentricity * cos(u)))
+        return 2 * pi / (self.period * (1 - self.eccentricity * cos(u)))
 
     def angular_moment_newton_raphson(self, t):
         u = self.get_u_newton_raphson(t)
