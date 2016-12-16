@@ -45,7 +45,7 @@ class Planet:
         return self.position(self.get_u_newton_raphson(t))
 
     def area(self, t1, t2, c):
-        return abs(c) * (t2-t1) / 2
+        return self.module(c) * (t2-t1) / 2
 
     def distance_sun_newton_raphson(self, t):
         u = self.get_u_newton_raphson(t)
@@ -72,3 +72,12 @@ class Planet:
         u = self.get_u_bessel(t)
         return [0, 0, pow(self.semimajor_axis,2) * self.diff_eccentric_newton_raphson(t)
                 * sqrt(1 - pow(self.eccentricity, 2)) * (1 - self.eccentricity * cos(u))]
+
+    def area_newton_raphson(self, t1, t2):
+        return self.area(t1, t2, self.angular_moment_newton_raphson(t2))
+
+    def area_bessel(self, t1, t2):
+        return self.area(t1, t2, self.angular_moment_bessel(t2))
+
+    def module(self, x):
+        return sqrt(pow(x[0], 2) + pow(x[1], 2) + pow(x[2], 2))

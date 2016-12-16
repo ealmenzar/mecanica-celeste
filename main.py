@@ -15,6 +15,10 @@ if __name__ == '__main__':
         print('Momento angular Bessel: ', planet.angular_moment_bessel(50))
         print('u NR: ', planet.get_u_newton_raphson(50))
         print('u Bessel: ', planet.get_u_bessel(50))
+        print('distancia al sol NR: ', planet.distance_sun_newton_raphson(50))
+        print('distancia al sol Bessel: ', planet.distance_sun_bessel(50))
+        print('area NR (0,50): ', planet.area_newton_raphson(0, 50))
+        print('area Bessel (0,50): ', planet.area_bessel(0, 50))
         for i in range(0, int(planet.period+1)):
             position = planet.get_pos_newton_raphson(i)
             axis_x.append(position[0])
