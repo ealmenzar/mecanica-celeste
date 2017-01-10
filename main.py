@@ -36,6 +36,6 @@ if __name__ == '__main__':
 
     ax.set_xlim3d(-40, 40)
     ax.set_ylim3d(-40, 40)
-    ax.set_zlim3d(-40, 40)
+    ax.set_zlim3d(-2, 2)
 
     plt.show()

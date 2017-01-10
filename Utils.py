@@ -19,10 +19,9 @@ def get_planets_list():
     return planetas
 
 
-def get_spin_matrix_y(omega):
-    return np.array([[cos(omega), 0, -sin(omega)], [sin(omega), 1, cos(omega)], [0, 0, 0]])
+def get_spin_matrix_y(angle):
+    return np.array([[cos(angle), 0, -sin(angle)], [0, 1, 0], [sin(angle), 0, cos(angle)]])
 
 
-def get_spin_matrix_z(omega):
-    return np.array([[cos(omega), -sin(omega), 0], [sin(omega), cos(omega), 0], [0, 0, 1]])
-
+def get_spin_matrix_z(angle):
+    return np.array([[cos(angle), -sin(angle), 0], [sin(angle), cos(angle), 0], [0, 0, 1]])

@@ -2,7 +2,7 @@
 Created at 1/12/16
 __author__ = 'Sergio Padilla'
 """
-from math import sin, pi, cos, sqrt
+from math import sin, pi, cos, sqrt, radians
 import Algorithm
 import numpy as np
 import Utils
@@ -89,4 +89,10 @@ class Planet:
         return sqrt(pow(x[0], 2) + pow(x[1], 2) + pow(x[2], 2))
 
     def get_spin_matrix(self):
-        return np.dot(Utils.get_spin_matrix_y(self.i), Utils.get_spin_matrix_z(self.omega))
+        i = radians(self.i)
+        omega = radians(self.omega)
+        # print("i=", self.i)
+        # print("omega", self.omega)
+        # print("i (rad)=", i)
+        # print("omega (rad)", omega)
+        return np.dot(Utils.get_spin_matrix_y(i), Utils.get_spin_matrix_z(omega))
