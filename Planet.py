@@ -21,7 +21,8 @@ class Planet:
 
     def position(self, u):
         return [self.semimajor_axis * (cos(u) - self.eccentricity),
-                self.semimajor_axis * sqrt(1 - pow(self.eccentricity,2)) * sin(u)]
+                self.semimajor_axis * sqrt(1 - pow(self.eccentricity, 2)) * sin(u),
+                0]
 
     def get_u_bessel(self, t):
         return Algorithm.bessel(self.xi(t), eccentricity=self.eccentricity, n=80)
@@ -65,12 +66,12 @@ class Planet:
 
     def angular_moment_newton_raphson(self, t):
         u = self.get_u_newton_raphson(t)
-        return [0, 0, pow(self.semimajor_axis,2) * self.diff_eccentric_newton_raphson(t)
+        return [0, 0, pow(self.semimajor_axis, 2) * self.diff_eccentric_newton_raphson(t)
                 * sqrt(1 - pow(self.eccentricity, 2)) * (1 - self.eccentricity * cos(u))]
 
     def angular_moment_bessel(self, t):
         u = self.get_u_bessel(t)
-        return [0, 0, pow(self.semimajor_axis,2) * self.diff_eccentric_newton_raphson(t)
+        return [0, 0, pow(self.semimajor_axis, 2) * self.diff_eccentric_newton_raphson(t)
                 * sqrt(1 - pow(self.eccentricity, 2)) * (1 - self.eccentricity * cos(u))]
 
     def area_newton_raphson(self, t1, t2):
