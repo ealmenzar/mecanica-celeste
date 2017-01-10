@@ -4,6 +4,8 @@ __author__ = 'Sergio Padilla'
 """
 from math import sin, pi, cos, sqrt
 import Algorithm
+import numpy as np
+import Utils
 
 
 class Planet:
@@ -22,9 +24,10 @@ class Planet:
         return 2 * pi * t / self.period
 
     def position(self, u):
-        return [self.semimajor_axis * (cos(u) - self.eccentricity),
-                self.semimajor_axis * sqrt(1 - pow(self.eccentricity, 2)) * sin(u),
-                0]
+        pos = np.array([self.semimajor_axis * (cos(u) - self.eccentricity),
+                        self.semimajor_axis * sqrt(1 - pow(self.eccentricity, 2)) * sin(u),
+                        0])
+        return np.dot(self.get_spin_matrix(), pos)
 
     def get_u_bessel(self, t):
         return Algorithm.bessel(self.xi(t), eccentricity=self.eccentricity, n=80)
@@ -84,3 +87,6 @@ class Planet:
 
     def module(self, x):
         return sqrt(pow(x[0], 2) + pow(x[1], 2) + pow(x[2], 2))
+
+    def get_spin_matrix(self):
+        return np.dot(Utils.get_spin_matrix_y(self.i), Utils.get_spin_matrix_z(self.omega))

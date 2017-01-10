@@ -2,7 +2,7 @@
 Created at 1/12/16
 __author__ = 'Sergio Padilla'
 """
-from Algorithm import get_planets_list
+from Utils import get_planets_list
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
