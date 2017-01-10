@@ -14,7 +14,7 @@ def get_planets_list():
     for planet in planets:
         new_planet = planets[planet]
         planetas.append(Planet(epsilon=new_planet['epsilon'], period=new_planet['p'], semimajor_axis=new_planet['a'],
-                               i=new_planet['i'], omega=new_planet['omega']))
+                               i=new_planet['i'], capital_omega=new_planet['capital_omega'], omega_bar=new_planet['omega_bar']))
 
     return planetas
 

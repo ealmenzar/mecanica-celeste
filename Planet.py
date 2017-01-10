@@ -10,15 +10,16 @@ import Utils
 
 class Planet:
 
-    def __init__(self, epsilon, period, semimajor_axis, i, omega):
+    def __init__(self, epsilon, period, semimajor_axis, i, capital_omega, omega_bar):
         self.eccentricity = epsilon
         self.period = period
         self.semimajor_axis = semimajor_axis
         self.semiminor_axis = semimajor_axis*sqrt(1-(pow(epsilon, 2)))
         self.mu = pow((2 * pi / period), 2) * pow(semimajor_axis, 3)
         self.h = -self.mu / (2 * semimajor_axis)
-        self.i = i
-        self.omega = omega
+        self.i = radians(i)
+        self.capital_omega = radians(capital_omega)
+        self.omega = radians(omega_bar - capital_omega)
         
     def xi(self, t):
         return 2 * pi * t / self.period
@@ -89,10 +90,4 @@ class Planet:
         return sqrt(pow(x[0], 2) + pow(x[1], 2) + pow(x[2], 2))
 
     def get_spin_matrix(self):
-        i = radians(self.i)
-        omega = radians(self.omega)
-        # print("i=", self.i)
-        # print("omega", self.omega)
-        # print("i (rad)=", i)
-        # print("omega (rad)", omega)
-        return np.dot(Utils.get_spin_matrix_y(i), Utils.get_spin_matrix_z(omega))
+        return np.dot(np.dot(Utils.get_spin_matrix_y(self.i), Utils.get_spin_matrix_z(self.omega)), Utils.get_spin_matrix_y(self.capital_omega))
