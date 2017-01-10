@@ -8,13 +8,15 @@ import Algorithm
 
 class Planet:
 
-    def __init__(self, epsilon, period, semimajor_axis):
+    def __init__(self, epsilon, period, semimajor_axis, i, omega):
         self.eccentricity = epsilon
         self.period = period
         self.semimajor_axis = semimajor_axis
         self.semiminor_axis = semimajor_axis*sqrt(1-(pow(epsilon, 2)))
         self.mu = pow((2 * pi / period), 2) * pow(semimajor_axis, 3)
         self.h = -self.mu / (2 * semimajor_axis)
+        self.i = i
+        self.omega = omega
         
     def xi(self, t):
         return 2 * pi * t / self.period
