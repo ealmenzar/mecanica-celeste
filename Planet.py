@@ -90,4 +90,4 @@ class Planet:
         return sqrt(pow(x[0], 2) + pow(x[1], 2) + pow(x[2], 2))
 
     def get_spin_matrix(self):
-        return np.dot(np.dot(Utils.get_spin_matrix_y(self.i), Utils.get_spin_matrix_z(self.omega)), Utils.get_spin_matrix_y(self.capital_omega))
+        return np.dot(np.dot(Utils.get_spin_matrix_y(self.capital_omega), Utils.get_spin_matrix_y(self.i)), Utils.get_spin_matrix_z(self.omega))
