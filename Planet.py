@@ -1,6 +1,6 @@
 """
 Created at 1/12/16
-__author__ = 'Sergio Padilla'
+__authors__ = 'Sergio Padilla / Marina Estévez / Irene Ocaña'
 """
 from math import sin, pi, cos, sqrt, radians
 import Algorithm
@@ -10,7 +10,8 @@ import Utils
 
 class Planet:
 
-    def __init__(self, epsilon, period, semimajor_axis, i, capital_omega, omega_bar):
+    def __init__(self, name, epsilon, period, semimajor_axis, i, capital_omega, omega_bar):
+        self.name = name
         self.eccentricity = epsilon
         self.period = period
         self.semimajor_axis = semimajor_axis
@@ -90,4 +91,4 @@ class Planet:
         return sqrt(pow(x[0], 2) + pow(x[1], 2) + pow(x[2], 2))
 
     def get_spin_matrix(self):
-        return np.dot(np.dot(Utils.get_spin_matrix_y(self.capital_omega), Utils.get_spin_matrix_y(self.i)), Utils.get_spin_matrix_z(self.omega))
+        return np.dot(np.dot(Utils.get_spin_matrix_z(self.capital_omega), Utils.get_spin_matrix_y(self.i)), Utils.get_spin_matrix_z(self.omega))

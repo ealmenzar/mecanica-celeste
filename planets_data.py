@@ -1,6 +1,6 @@
 """
-Created at 6/12/16
-__author__ = 'Sergio padilla'
+Created at 1/12/16
+__authors__ = 'Sergio Padilla / Marina Estévez / Irene Ocaña'
 """
 planets = {
     'Mercurio': {

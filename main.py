@@ -1,6 +1,6 @@
 """
 Created at 1/12/16
-__author__ = 'Sergio Padilla'
+__authors__ = 'Sergio Padilla / Marina Estévez / Irene Ocaña'
 """
 from Utils import get_planets_list
 import matplotlib.pyplot as plt
@@ -14,15 +14,23 @@ if __name__ == '__main__':
     fig = plt.figure()
     ax = fig.gca(projection='3d')
 
+    print("Introduce el tiempo (en días terrestres): ")
+    t = int(input())
+
     for planet in planets:
-        print('Momento angular NR: ', planet.angular_moment_newton_raphson(50))
-        print('Momento angular Bessel: ', planet.angular_moment_bessel(50))
-        print('u NR: ', planet.get_u_newton_raphson(50))
-        print('u Bessel: ', planet.get_u_bessel(50))
-        print('distancia al sol NR: ', planet.distance_sun_newton_raphson(50))
-        print('distancia al sol Bessel: ', planet.distance_sun_bessel(50))
-        print('area NR (0,50): ', planet.area_newton_raphson(0, 50))
-        print('area Bessel (0,50): ', planet.area_bessel(0, 50))
+        position = planet.get_pos_newton_raphson(t)
+        print(' *************************************************** ')
+        print(planet.name)
+        print(' *************************************************** ')
+        print('La posición del planeta es: ', position)
+        print('Momento angular con Newton-Raphson: ', planet.angular_moment_newton_raphson(50))
+        print('Momento angular con Bessel: ', planet.angular_moment_bessel(50))
+        print('Anomalía (u) con Newton-Raphson: ', planet.get_u_newton_raphson(50))
+        print('Anomalía (u) con Bessel: ', planet.get_u_bessel(50))
+        print('Distancia al Sol con Newton-Raphson: ', planet.distance_sun_newton_raphson(50))
+        print('Distancia al Sol con Bessel: ', planet.distance_sun_bessel(50))
+        print('Área Newton-Raphson (tiempo inicial: 0, tiempo final: t): ', planet.area_newton_raphson(0, t))
+        print('Área Bessel (tiempo inicial: 0, tiempo final: t): ', planet.area_bessel(0, t))
         for i in range(0, int(planet.period+1)+10):
             position = planet.get_pos_newton_raphson(i)
             axis_x.append(position[0])
@@ -30,6 +38,11 @@ if __name__ == '__main__':
             axis_z.append(position[2])
 
         ax.plot(axis_x, axis_y, axis_z)
+        ax.scatter(position[0], position[1], position[2])
+        ax.scatter(position[0], position[1], position[2], s=8 ** 2, c='k', alpha=0.5)
+        ax.scatter(0, 0, s=10 ** 2, c='y', marker='*')
+        ax.scatter(0, 0, s=11 ** 2, c='y', alpha=0.5)
+
         axis_x = []
         axis_y = []
         axis_z = []

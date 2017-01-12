@@ -1,7 +1,6 @@
 """
-Created at 10/1/17
-__author__ = 'Sergio Padilla'
-
+Created at 1/12/16
+__authors__ = 'Sergio Padilla / Marina Estévez / Irene Ocaña'
 """
 from math import sin, cos
 from Planet import Planet
@@ -13,7 +12,7 @@ def get_planets_list():
     planetas = []
     for planet in planets:
         new_planet = planets[planet]
-        planetas.append(Planet(epsilon=new_planet['epsilon'], period=new_planet['p'], semimajor_axis=new_planet['a'],
+        planetas.append(Planet(name=planet, epsilon=new_planet['epsilon'], period=new_planet['p'], semimajor_axis=new_planet['a'],
                                i=new_planet['i'], capital_omega=new_planet['capital_omega'], omega_bar=new_planet['omega_bar']))
 
     return planetas
