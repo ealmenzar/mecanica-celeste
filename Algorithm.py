@@ -1,6 +1,6 @@
 """
-Created at 6/12/16
-__author__ = 'Sergio Padilla'
+Created at 1/12/16
+__authors__ = 'Sergio Padilla / Marina Estévez / Irene Ocaña'
 """
 from scipy import special
 from math import pi, sin
