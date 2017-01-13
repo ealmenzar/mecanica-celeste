@@ -54,3 +54,6 @@ if __name__ == '__main__':
     ax.set_zlim3d(-2, 2)
 
     plt.show()
+
+print(5 ** 2 * 2)
+print(2 * 5 ** 2)

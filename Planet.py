@@ -99,4 +99,4 @@ class Planet:
         return - self.mu / (2* self.semimajor_axis)
 
     def get_spin_matrix(self):
-        return np.dot(np.dot(Utils.get_spin_matrix_z(self.capital_omega), Utils.get_spin_matrix_y(self.i)), Utils.get_spin_matrix_z(self.omega))
+        return np.dot(np.dot(Utils.get_spin_matrix_z(self.capital_omega), Utils.get_spin_matrix_x(self.i)), Utils.get_spin_matrix_z(self.omega))

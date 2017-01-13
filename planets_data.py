@@ -22,7 +22,7 @@ planets = {
     'Tierra': {
                 'a': 1,
                 'epsilon': 0.0167,
-                'p': 365.256,
+                'p': 365.26,
                 'i': 0,
                 'capital_omega': 0,
                 'omega_bar': 101.22

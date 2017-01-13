@@ -4,7 +4,7 @@ __authors__ = 'Sergio Padilla / Marina Estévez / Irene Ocaña'
 """
 from scipy import special
 from math import pi, sin
-DEFAULT_TOLERANCE = 1e-10
+DEFAULT_TOLERANCE = 1e-12
 
 
 def newton_raphson(func, diff_func, u_0=pi, tolerance=DEFAULT_TOLERANCE):
