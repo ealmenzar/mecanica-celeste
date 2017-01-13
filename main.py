@@ -49,9 +49,9 @@ if __name__ == '__main__':
         axis_y = []
         axis_z = []
 
-    ax.set_xlim3d(-40, 40)
-    ax.set_ylim3d(-40, 40)
-    ax.set_zlim3d(-2, 2)
+    ax.set_xlim3d(-30, 30)
+    ax.set_ylim3d(-30, 30)
+    ax.set_zlim3d(-30, 30)
 
     plt.show()
 
