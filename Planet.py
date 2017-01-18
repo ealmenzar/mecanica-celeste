@@ -50,7 +50,8 @@ class Planet:
         return Algorithm.newton_raphson(f, diff_f)
 
     def get_pos_newton_raphson(self, t):
-        return self.position(self.get_u_newton_raphson(t))
+        time = t % self.period
+        return self.position(self.get_u_newton_raphson(time))
 
     def area(self, t1, t2, c):
         return self.module(c) * (t2-t1) / 2

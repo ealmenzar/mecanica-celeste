@@ -56,22 +56,18 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Solar System</a>
+          <a class="navbar-brand" href="#">Sistema Solar</a>
         </div>
-        <!--<div id="navbar" class="collapse navbar-collapse">-->
-          <!--<ul class="nav navbar-nav">-->
-            <!--<li class="active"><a href="#">Home</a></li>-->
-            <!--<li><a href="#about">About</a></li>-->
-            <!--<li><a href="#contact">Contact</a></li>-->
-          <!--</ul>-->
-        <!--</div>&lt;!&ndash;/.nav-collapse &ndash;&gt;-->
       </div>
     </nav>
 
-    <!--<div class="container" style="width: 100%">-->
-
       <div class="starter-template container-fluid">
-        <h1>Planets</h1>
+        <h1>Planetas</h1>
+        <form action="/" method="get">
+          Tiempo (en días terrestres):
+          <input type="number" name="t" min="0" value="{{t}}">
+          <input type="submit">
+        </form>
         <div class="row">
           <div class="col-sm-6">
             <div id="small_planets" style="width: 650px; height: 450px"></div>
@@ -81,91 +77,158 @@
           </div>
         </div>
 
+        {% if planets_data %}
+          <div class="table-responsive">
+              <table class="table table-striped">
+                  <thead>
+                      <tr>
+                          <th class="text-center">Planeta</th>
+                          <th class="text-center">Posición</th>
+                          <th class="text-center">Anomalía (u)</th>
+                          <th class="text-center">Momento angular</th>
+                          <th class="text-center">Energía</th>
+                          <th class="text-center">Energía Teórica</th>
+                          <th class="text-center">Área barrida</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {% for planet in planets_data %}
+                      <tr>
+                          <td>{{ planet['name'] }}</td>
+                          <td>{{ planet['position'] }}</td>
+                          <td>{{ planet['u_nr'] }}</td>
+                          <td>{{ planet['angular_moment_nr'][2] }}</td>
+                          <td>{{ planet['energy'] }}</td>
+                          <td>{{ planet['energy_th'] }}</td>
+                          <td>{{ planet['area_nr'] }}</td>
+                      </tr>
+                      {% endfor %}
+                  </tbody>
+              </table>
+          </div>
+        {% endif %}
+
         <script>
+          window.onload = upload({{t}});
+            function upload(n) {
+                  $.get("/get_solar_system_data", {t:n}, function (response) {
+                      var json = JSON.parse(response);
+                      var small = [];
+                      var big = [];
+                      $.each(json, function( index, value ) {
+                          var planetchart = {
+                              x:value.pos_x,  y: value.pos_y , z: value.pos_z,
+                              mode: 'markers',
+                              showlegend: false,
+                              marker: {
+                                size: 10,
+                                line: {
+                                  color: 'rgba(217, 217, 217, 0.14)',
+                                  width: 0
+                                },
+                                opacity: 1
+                              },
+                              type: 'scatter3d'
+                           };
+                        if(value.name == 'Mercurio' || value.name == 'Venus' || value.name == 'Tierra' || value.name == 'Marte') {
+                            var trace = {
+                              x:value.x,  y: value.y, z: value.z,
+                              mode: 'markers',
+                              name: value.name,
+                              marker: {
+                                size: 2,
+                                line: {
+                                  color: 'rgba(217, 217, 217, 0.14)',
+                                  width: 0
+                                },
+                                opacity: 1
+                              },
+                              type: 'scatter3d'
+                            };
+                            small.push(trace);
+                            small.push(planetchart);
+                        }
+                        else {
+                            var trace = {
+                              x:value.x,  y: value.y, z: value.z,
+                              mode: 'markers',
+                              name: value.name,
+                              marker: {
+                                size: 2,
+                                line: {
+                                  color: 'rgba(217, 217, 217, 0.14)',
+                                  width: 0
+                                },
+                                opacity: 1
+                              },
+                              type: 'scatter3d'
+                            };
+                            big.push(trace);
+                            big.push(planetchart);
+                        }
+                      });
 
-          $.get("/get_solar_system_data", function (response) {
-                var json = JSON.parse(response);
-                var small = [];
-                var big = [];
-                $.each(json, function( index, value ) {
-                  if(value.name == 'Mercurio' || value.name == 'Venus' || value.name == 'Tierra' || value.name == 'Marte') {
-                      var trace = {
-                        x:value.x,  y: value.y, z: value.z,
-                        mode: 'markers',
-                        name: value.name,
-                        marker: {
-                          size: 2,
-                          line: {
-                            color: 'rgba(217, 217, 217, 0.14)',
-                            width: 0
-                          },
-                          opacity: 1
-                        },
-                        type: 'scatter3d'
+                      var layout_big = {
+                        scene:{
+                           aspectmode: "manual",
+                           aspectratio: {
+                              x: 1, y: 0.7, z: 1
+                            },
+                           xaxis: {
+                              nticks: 9,
+                              range: [-35, 35]
+                            },
+                            yaxis: {
+                              nticks: 7,
+                              range: [-35, 35]
+                            },
+                           zaxis: {
+                             nticks: 10,
+                             range: [-35, 35]
+                            }}
                       };
-                      small.push(trace);
-                  }
-                  else {
-                      var trace = {
-                        x:value.x,  y: value.y, z: value.z,
-                        mode: 'markers',
-                        name: value.name,
-                        marker: {
-                          size: 2,
-                          line: {
-                            color: 'rgba(217, 217, 217, 0.14)',
-                            width: 0
-                          },
-                          opacity: 1
-                        },
-                        type: 'scatter3d'
+
+                      var layout_small = {
+                        scene:{
+                           aspectmode: "manual",
+                           aspectratio: {
+                              x: 1, y: 0.7, z: 1
+                            },
+                           xaxis: {
+                              nticks: 9,
+                              range: [-2, 2]
+                            },
+                            yaxis: {
+                              nticks: 7,
+                              range: [-2, 2]
+                            },
+                           zaxis: {
+                             nticks: 10,
+                             range: [-2, 2]
+                            }}
                       };
-                      big.push(trace);
-                  }
-                });
 
-                var layout_big = {
-                  scene:{
-                     aspectmode: "manual",
-                     aspectratio: {
-                        x: 1, y: 0.7, z: 1
-                      },
-                     xaxis: {
-                        nticks: 9,
-                        range: [-35, 35]
-                      },
-                      yaxis: {
-                        nticks: 7,
-                        range: [-35, 35]
-                      },
-                     zaxis: {
-                       nticks: 10,
-                       range: [-35, 35]
-                      }}
-                };
+                      var sun = {
+                          x:[0],  y: [0], z: [0],
+                          mode: 'markers',
+                          showlegend: false,
+                          marker: {
+                            size: 20,
+                            line: {
+                              color: 'rgba(217, 217, 217, 0.14)',
+                              width: 0
+                            },
+                            opacity: 1
+                          },
+                          type: 'scatter3d'
+                       };
 
-                var layout_small = {
-                  scene:{
-                     aspectmode: "manual",
-                     aspectratio: {
-                        x: 1, y: 0.7, z: 1
-                      },
-                     xaxis: {
-                        nticks: 9,
-                        range: [-2, 2]
-                      },
-                      yaxis: {
-                        nticks: 7,
-                        range: [-2, 2]
-                      },
-                     zaxis: {
-                       nticks: 10,
-                       range: [-2, 2]
-                      }}
-                };
-                Plotly.newPlot('big_planets', big, layout_big);
-                Plotly.newPlot('small_planets', small, layout_small);
-          });
+                      small.push(sun);
+                      big.push(sun);
+                      Plotly.newPlot('big_planets', big, layout_big);
+                      Plotly.newPlot('small_planets', small, layout_small);
+                   });
+            }
         </script>
       </div>
 
