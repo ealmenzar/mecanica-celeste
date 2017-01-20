@@ -6,7 +6,7 @@ planets = {
     'Mercurio': {
                 'a': 0.387,
                 'epsilon': 0.206,
-                'p': 87.66,
+                'p': 87.97,
                 'i': 7,
                 'capital_omega': 47.14,
                 'omega_bar': 75.9
@@ -14,7 +14,7 @@ planets = {
     'Venus': {
                 'a': 0.723,
                 'epsilon': 0.007,
-                'p': 226.459,
+                'p': 224.7,
                 'i': 3.59,
                 'capital_omega': 75.78,
                 'omega_bar': 130.15
@@ -30,7 +30,7 @@ planets = {
     'Marte': {
                 'a': 1.524,
                 'epsilon': 0.093,
-                'p': 686.68,
+                'p': 686.98,
                 'i': 1.85,
                 'capital_omega': 48.78,
                 'omega_bar': 334.22
@@ -38,7 +38,7 @@ planets = {
     'Jupiter': {
                 'a': 5.203,
                 'epsilon': 0.048,
-                'p': 4331.936,
+                'p': 4332.6,
                 'i': 1.31,
                 'capital_omega': 99.44,
                 'omega_bar': 12.72
@@ -46,7 +46,7 @@ planets = {
     'Saturno': {
                 'a': 9.546,
                 'epsilon': 0.056,
-                'p': 10760.442,
+                'p': 10759,
                 'i': 2.5,
                 'capital_omega': 112.79,
                 'omega_bar': 91.09
@@ -54,7 +54,7 @@ planets = {
     'Urano': {
                 'a': 19.20,
                 'epsilon': 0.047,
-                'p': 30685.157,
+                'p': 30687,
                 'i': 0.77,
                 'capital_omega': 73.48,
                 'omega_bar': 169.05
@@ -62,14 +62,9 @@ planets = {
     'Neptuno': {
                 'a': 30.09,
                 'epsilon': 0.009,
-                'p': 60194.19,
+                'p': 60784,
                 'i': 1.78,
                 'capital_omega': 130.68,
                 'omega_bar': 43.83
             }
-    # 'pluton': {
-    #           'a': 39.44,
-    #           'epsilon': 0.2482,
-    #           'p': 90473.91
-    #         }
 }
